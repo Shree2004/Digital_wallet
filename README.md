@@ -1,2 +1,4 @@
-# Digital_wallet
-Digital wallet to track user expenses and spend and deposit money
+# Digital Wallet
+
+Spring Boot + PostgreSQL REST API  
+Built with Java 24
