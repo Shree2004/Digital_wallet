@@ -5,7 +5,6 @@ import com.shree.DigitalWallet.entity.Wallet;
 import com.shree.DigitalWallet.repositories.UserRepository;
 import com.shree.DigitalWallet.repositories.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -47,4 +46,7 @@ public class UserService {
         return savedUser;
     }
 
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
 }
