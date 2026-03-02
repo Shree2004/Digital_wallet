@@ -17,6 +17,6 @@ public class Wallet {
 
     @OneToOne
     @JoinColumn(name = "userId", nullable = false, unique = true)
-    private User userId;
+    private User user;
 
 }
