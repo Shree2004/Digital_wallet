@@ -2,6 +2,7 @@ package com.shree.DigitalWallet.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -18,6 +19,7 @@ public class Transaction {
 
     private String type; // Deposit or withdraw
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     @ManyToOne
