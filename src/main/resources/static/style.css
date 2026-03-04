@@ -1,0 +1,107 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe UI, Arial;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    min-height:100vh;
+}
+
+/* Title */
+
+.main-title{
+    text-align:center;
+    color:white;
+    margin-top:30px;
+    margin-bottom:30px;
+    font-size:34px;
+}
+
+/* Layout */
+
+.layout{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+/* Card */
+
+.card{
+    background:white;
+    width:360px;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Headings */
+
+h2{
+    margin-bottom:15px;
+}
+
+h3{
+    margin-top:15px;
+}
+
+/* Inputs */
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:10px;
+    border-radius:6px;
+    border:1px solid #ddd;
+}
+
+/* Buttons */
+
+button{
+    width:100%;
+    padding:10px;
+    background:#4facfe;
+    border:none;
+    border-radius:6px;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2f80ed;
+}
+
+/* Divider */
+
+hr{
+    margin:18px 0;
+    border:none;
+    border-top:1px solid #eee;
+}
+
+/* Balance */
+
+#balance{
+    font-weight:bold;
+    margin-top:10px;
+    color:#2f80ed;
+}
+
+/* Transaction list */
+
+ul{
+    list-style:none;
+    padding:0;
+}
+
+li{
+    background:#f4f6fa;
+    padding:8px;
+    margin-bottom:6px;
+    border-radius:5px;
+}
