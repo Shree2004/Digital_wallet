@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/wallet")
 public class WalletController {
 
