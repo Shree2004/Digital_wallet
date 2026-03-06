@@ -10,12 +10,16 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(nullable = false)
     private String userName;
+
+    @Column(nullable = false)
+    private String password;   // ✅ ADD THIS
 
     @Column(nullable = false, unique = true)
     private String emailId;
@@ -26,6 +30,5 @@ public class User {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
 
 }

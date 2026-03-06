@@ -4,7 +4,7 @@ import com.shree.DigitalWallet.DTO.AmountRequest;
 import com.shree.DigitalWallet.DTO.TransferRequest;
 import com.shree.DigitalWallet.entity.Wallet;
 import com.shree.DigitalWallet.service.WalletService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -14,35 +14,62 @@ import java.math.BigDecimal;
 @RequestMapping("/wallet")
 public class WalletController {
 
-    @Autowired
-    private WalletService walletService;
+    private final WalletService walletService;
 
-    @GetMapping("/{userId}")
-    public Wallet getWalletByUserId(@PathVariable Long userId) {
-        return walletService.getWalletByUserId(userId);
+    public WalletController(WalletService walletService) {
+        this.walletService = walletService;
     }
 
-    @GetMapping("/{userId}/balance")
-    public BigDecimal showBalance(@PathVariable Long userId) {
-        return walletService.showBalance(userId);
+    @GetMapping
+    public Wallet getWallet(Authentication authentication) {
+
+        String username = authentication.getName();
+
+        return walletService.getWalletByUsername(username);
     }
 
-    @PostMapping("/{userId}/deposit")
-    public BigDecimal depositMoney(@PathVariable Long userId, @RequestBody AmountRequest request) {
-        return walletService.depositMoney(request.getAmount(),userId);
+    @GetMapping("/balance")
+    public BigDecimal showBalance(Authentication authentication) {
+
+        String username = authentication.getName();
+
+        return walletService.showBalanceByUsername(username);
     }
 
-    @PostMapping("/{userId}/withdraw")
-    public BigDecimal withdrawMoney(@PathVariable Long userId,@RequestBody AmountRequest request){
-        return walletService.withdrawMoney(request.getAmount(), userId);
+    @PostMapping("/deposit")
+    public BigDecimal depositMoney(Authentication authentication,
+                                   @RequestBody AmountRequest request) {
+
+        String username = authentication.getName();
+
+        return walletService.depositMoneyByUsername(
+                username,
+                request.getAmount()
+        );
+    }
+
+    @PostMapping("/withdraw")
+    public BigDecimal withdrawMoney(Authentication authentication,
+                                    @RequestBody AmountRequest request) {
+
+        String username = authentication.getName();
+
+        return walletService.withdrawMoneyByUsername(
+                username,
+                request.getAmount()
+        );
     }
 
     @PostMapping("/transfer")
-    public BigDecimal transferMoney(@RequestBody TransferRequest request){
-        return walletService.transferMoney(
-                request.getSenderId(),
-                request.getReceiverId(),
-                request.getAmount());
-    }
+    public BigDecimal transferMoney(Authentication authentication,
+                                    @RequestBody TransferRequest request){
 
+        String senderUsername = authentication.getName();
+
+        return walletService.transferMoneyByUsername(
+                senderUsername,
+                request.getReceiverId(),
+                request.getAmount()
+        );
+    }
 }
