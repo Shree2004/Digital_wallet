@@ -1,96 +1,102 @@
-const API_BASE = "http://localhost:8080";
-fetch(`${API_BASE}/users/register`)
+const API = "http://localhost:8080";
 
-async function registerUser() {
+/* REGISTER USER */
+async function registerUser(){
 
-    const user = {
-        userName: document.getElementById("username").value,
-        emailId: document.getElementById("email").value,
-        mobileNumber: document.getElementById("mobile").value
-    };
+const user = {
+userName: document.getElementById("username").value,
+emailId: document.getElementById("email").value,
+mobileNumber: document.getElementById("mobile").value
+};
 
-    const res = await fetch("http://localhost:8080/users/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-    });
+const res = await fetch(API + "/users/register",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(user)
+});
 
-    const data = await res.json();
+const data = await res.json();
 
-    alert("User created with ID: " + data.userId);
+alert("User created with ID: " + data.userId);
+
 }
 
-async function checkBalance() {
+/* CHECK BALANCE */
+async function checkBalance(){
 
-    const userId = document.getElementById("userId").value;
+const userId = document.getElementById("userId").value;
 
-    const res = await fetch(`http://localhost:8080/wallet/${userId}/balance`);
+const res = await fetch(API + "/wallet/" + userId + "/balance");
 
-    const data = await res.json();
+const data = await res.json();
 
-    document.getElementById("balance").innerText = "Balance: " + data;
+document.getElementById("balance").innerText = "Balance: " + data;
+
 }
 
-async function depositMoney() {
+/* DEPOSIT */
+async function depositMoney(){
 
-    const userId = document.getElementById("userId").value;
-    const amount = document.getElementById("depositAmount").value;
+const userId = document.getElementById("userId").value;
+const amount = document.getElementById("depositAmount").value;
 
-    const res = await fetch(`http://localhost:8080/wallet/${userId}/deposit`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            amount: amount
-        })
-    });
+const res = await fetch(API + "/wallet/" + userId + "/deposit",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({amount:amount})
+});
 
-    const data = await res.json();
+const data = await res.json();
 
-    alert("New Balance: " + data);
+alert("New Balance: " + data);
+
 }
 
-async function withdrawMoney() {
+/* WITHDRAW */
+async function withdrawMoney(){
 
-    const userId = document.getElementById("userId").value;
-    const amount = document.getElementById("withdrawAmount").value;
+const userId = document.getElementById("userId").value;
+const amount = document.getElementById("withdrawAmount").value;
 
-    const res = await fetch(`http://localhost:8080/wallet/${userId}/withdraw`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            amount: amount
-        })
-    });
+const res = await fetch(API + "/wallet/" + userId + "/withdraw",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({amount:amount})
+});
 
-    const data = await res.json();
+const data = await res.json();
 
-    alert("New Balance: " + data);
+alert("New Balance: " + data);
+
 }
 
-async function getTransactions() {
+/* TRANSFER */
+async function transferMoney(){
 
-    const userId = document.getElementById("userId").value;
+const senderId = document.getElementById("senderId").value;
+const receiverId = document.getElementById("receiverId").value;
+const amount = document.getElementById("transferAmount").value;
 
-    const res = await fetch(`http://localhost:8080/wallet/${userId}/transactions`);
+const res = await fetch(API + "/wallet/transfer",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+senderId:senderId,
+receiverId:receiverId,
+amount:amount
+})
+});
 
-    const transactions = await res.json();
+const data = await res.json();
 
-    const list = document.getElementById("transactions");
+alert("Transfer complete. Sender balance: " + data);
 
-    list.innerHTML = "";
-
-    transactions.forEach(t => {
-
-        const li = document.createElement("li");
-
-        li.innerText = `${t.type} : ${t.amount}`;
-
-        list.appendChild(li);
-    });
 }
