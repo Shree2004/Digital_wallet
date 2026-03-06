@@ -1,102 +1,113 @@
 const API = "http://localhost:8080";
 
-/* REGISTER USER */
-async function registerUser(){
+async function login(){
 
-const user = {
-userName: document.getElementById("username").value,
-emailId: document.getElementById("email").value,
-mobileNumber: document.getElementById("mobile").value
-};
+const userName = document.getElementById("username").value;
+const password = document.getElementById("password").value;
 
-const res = await fetch(API + "/users/register",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(user)
-});
-
-const data = await res.json();
-
-alert("User created with ID: " + data.userId);
-
-}
-
-/* CHECK BALANCE */
-async function checkBalance(){
-
-const userId = document.getElementById("userId").value;
-
-const res = await fetch(API + "/wallet/" + userId + "/balance");
-
-const data = await res.json();
-
-document.getElementById("balance").innerText = "Balance: " + data;
-
-}
-
-/* DEPOSIT */
-async function depositMoney(){
-
-const userId = document.getElementById("userId").value;
-const amount = document.getElementById("depositAmount").value;
-
-const res = await fetch(API + "/wallet/" + userId + "/deposit",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({amount:amount})
-});
-
-const data = await res.json();
-
-alert("New Balance: " + data);
-
-}
-
-/* WITHDRAW */
-async function withdrawMoney(){
-
-const userId = document.getElementById("userId").value;
-const amount = document.getElementById("withdrawAmount").value;
-
-const res = await fetch(API + "/wallet/" + userId + "/withdraw",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({amount:amount})
-});
-
-const data = await res.json();
-
-alert("New Balance: " + data);
-
-}
-
-/* TRANSFER */
-async function transferMoney(){
-
-const senderId = document.getElementById("senderId").value;
-const receiverId = document.getElementById("receiverId").value;
-const amount = document.getElementById("transferAmount").value;
-
-const res = await fetch(API + "/wallet/transfer",{
+const response = await fetch(API + "/auth/login",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
 body:JSON.stringify({
-senderId:senderId,
+userName:userName,
+password:password
+})
+});
+
+const data = await response.json();
+
+localStorage.setItem("token",data.token);
+
+window.location.href="wallet.html";
+}
+
+async function getBalance(){
+
+const token = localStorage.getItem("token");
+
+const response = await fetch(API + "/wallet/balance",{
+headers:{
+"Authorization":"Bearer " + token
+}
+});
+
+const balance = await response.text();
+
+document.getElementById("balance").innerText = balance;
+
+}
+
+async function deposit(){
+
+const token = localStorage.getItem("token");
+
+const amount = document.getElementById("depositAmount").value;
+
+await fetch(API + "/wallet/deposit",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer " + token
+},
+body:JSON.stringify({
+amount:amount
+})
+});
+
+getBalance();
+
+}
+
+async function withdraw(){
+
+const token = localStorage.getItem("token");
+
+const amount = document.getElementById("withdrawAmount").value;
+
+await fetch(API + "/wallet/withdraw",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer " + token
+},
+body:JSON.stringify({
+amount:amount
+})
+});
+
+getBalance();
+
+}
+
+function logout(){
+
+localStorage.removeItem("token");
+
+window.location.href="login.html";
+
+}
+
+async function transfer(){
+
+const token = localStorage.getItem("token");
+
+const receiverId = document.getElementById("receiverId").value;
+const amount = document.getElementById("transferAmount").value;
+
+await fetch(API + "/wallet/transfer",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer " + token
+},
+body:JSON.stringify({
 receiverId:receiverId,
 amount:amount
 })
 });
 
-const data = await res.json();
-
-alert("Transfer complete. Sender balance: " + data);
+getBalance();
 
 }

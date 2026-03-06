@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Digital Wallet</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body onload="getBalance()">
+
+<div class="container">
+
+    <h1>Digital Wallet</h1>
+
+    <div class="balance-card">
+        <p>Your Balance</p>
+        <h2 id="balance">0</h2>
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT SECTION -->
+
+        <div class="card">
+
+            <h3>Deposit</h3>
+
+            <input id="depositAmount" type="number" placeholder="Enter amount">
+
+            <button class="deposit-btn" onclick="deposit()">Deposit</button>
+
+            <h3>Withdraw</h3>
+
+            <input id="withdrawAmount" type="number" placeholder="Enter amount">
+
+            <button class="withdraw-btn" onclick="withdraw()">Withdraw</button>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="card">
+
+            <h3>Transfer Money</h3>
+
+            <label>Receiver User ID</label> <input id="receiverId" type="number" placeholder="Enter receiver user id">
+
+            <label>Amount</label> <input id="transferAmount" type="number" placeholder="Enter amount">
+
+            <button class="transfer-btn" onclick="transfer()">Transfer</button>
+
+            <button class="logout-btn" onclick="logout()">Logout</button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>
