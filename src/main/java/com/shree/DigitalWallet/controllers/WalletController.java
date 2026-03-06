@@ -1,6 +1,7 @@
 package com.shree.DigitalWallet.controllers;
 
 import com.shree.DigitalWallet.DTO.AmountRequest;
+import com.shree.DigitalWallet.DTO.TransferRequest;
 import com.shree.DigitalWallet.entity.Wallet;
 import com.shree.DigitalWallet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ public class WalletController {
 
     @Autowired
     private WalletService walletService;
-
 
     @GetMapping("/{userId}")
     public Wallet getWalletByUserId(@PathVariable Long userId) {
@@ -35,6 +35,14 @@ public class WalletController {
     @PostMapping("/{userId}/withdraw")
     public BigDecimal withdrawMoney(@PathVariable Long userId,@RequestBody AmountRequest request){
         return walletService.withdrawMoney(request.getAmount(), userId);
+    }
+
+    @PostMapping("/transfer")
+    public BigDecimal transferMoney(@RequestBody TransferRequest request){
+        return walletService.transferMoney(
+                request.getSenderId(),
+                request.getReceiverId(),
+                request.getAmount());
     }
 
 }

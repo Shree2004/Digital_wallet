@@ -1,107 +1,66 @@
-*{
-    box-sizing:border-box;
-}
-
 body{
-    margin:0;
-    font-family:Segoe UI, Arial;
-    background:linear-gradient(135deg,#4facfe,#00f2fe);
-    min-height:100vh;
+font-family: Arial, Helvetica, sans-serif;
+background: linear-gradient(135deg,#4facfe,#00f2fe);
+margin:0;
+padding:40px;
 }
 
-/* Title */
-
-.main-title{
-    text-align:center;
-    color:white;
-    margin-top:30px;
-    margin-bottom:30px;
-    font-size:34px;
+.title{
+text-align:center;
+color:white;
+margin-bottom:40px;
+font-size:36px;
 }
 
-/* Layout */
-
-.layout{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
+.container{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
 }
-
-/* Card */
 
 .card{
-    background:white;
-    width:360px;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+background:white;
+padding:25px;
+width:280px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:0.3s;
 }
 
-/* Headings */
-
-h2{
-    margin-bottom:15px;
+.card:hover{
+transform:translateY(-5px);
 }
 
-h3{
-    margin-top:15px;
+.card h2{
+margin-top:0;
 }
-
-/* Inputs */
 
 input{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:10px;
-    border-radius:6px;
-    border:1px solid #ddd;
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+border:1px solid #ccc;
 }
-
-/* Buttons */
 
 button{
-    width:100%;
-    padding:10px;
-    background:#4facfe;
-    border:none;
-    border-radius:6px;
-    color:white;
-    font-size:14px;
-    cursor:pointer;
+width:100%;
+padding:10px;
+margin-top:6px;
+border:none;
+border-radius:6px;
+background:#4facfe;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
 }
 
-button:hover{
-    background:#2f80ed;
-}
-
-/* Divider */
-
-hr{
-    margin:18px 0;
-    border:none;
-    border-top:1px solid #eee;
-}
-
-/* Balance */
+button:hover
 
 #balance{
-    font-weight:bold;
-    margin-top:10px;
-    color:#2f80ed;
-}
-
-/* Transaction list */
-
-ul{
-    list-style:none;
-    padding:0;
-}
-
-li{
-    background:#f4f6fa;
-    padding:8px;
-    margin-bottom:6px;
-    border-radius:5px;
+font-weight:bold;
+margin-top:10px;
+color:#333;
 }

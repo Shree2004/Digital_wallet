@@ -77,4 +77,49 @@ public class WalletService {
         return newBalance;
     }
 
+    @Transactional
+    public BigDecimal transferMoney(Long senderId, Long receiverId, BigDecimal amount) {
+
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("Transfer amount must be greater than zero");
+        }
+
+        if (senderId.equals(receiverId)) {
+            throw new RuntimeException("Cannot transfer money to the same user");
+        }
+
+        Wallet senderWallet = getWalletByUserId(senderId);
+        Wallet receiverWallet = getWalletByUserId(receiverId);
+
+        if (amount.compareTo(senderWallet.getBalanceMoney()) > 0) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+        // Deduct from sender
+        BigDecimal senderNewBalance = senderWallet.getBalanceMoney().subtract(amount);
+        senderWallet.setBalanceMoney(senderNewBalance);
+        walletRepo.save(senderWallet);
+
+        // Add to receiver
+        BigDecimal receiverNewBalance = receiverWallet.getBalanceMoney().add(amount);
+        receiverWallet.setBalanceMoney(receiverNewBalance);
+        walletRepo.save(receiverWallet);
+
+        // Sender transaction
+        Transaction senderTransaction = new Transaction();
+        senderTransaction.setWallet(senderWallet);
+        senderTransaction.setType("TRANSFER_OUT");
+        senderTransaction.setAmount(amount);
+        transRepo.save(senderTransaction);
+
+        // Receiver transaction
+        Transaction receiverTransaction = new Transaction();
+        receiverTransaction.setWallet(receiverWallet);
+        receiverTransaction.setType("TRANSFER_IN");
+        receiverTransaction.setAmount(amount);
+        transRepo.save(receiverTransaction);
+
+        return senderNewBalance;
+    }
+
 }

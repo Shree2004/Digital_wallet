@@ -4,6 +4,7 @@ import com.shree.DigitalWallet.entity.User;
 import com.shree.DigitalWallet.entity.Wallet;
 import com.shree.DigitalWallet.repositories.UserRepository;
 import com.shree.DigitalWallet.repositories.WalletRepository;
+import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

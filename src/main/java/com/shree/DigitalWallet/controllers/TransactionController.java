@@ -19,5 +19,4 @@ public class TransactionController {
     public List<Transaction> getTransactionsByUserId(@PathVariable Long userId){
         return transactionService.getTransactionsByUserId(userId);
     }
-
 }

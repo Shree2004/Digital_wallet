@@ -1,62 +1,68 @@
-<link rel="stylesheet" href="/style.css">
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Digital Wallet</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
 <body>
 
-<h1 class="main-title">Digital Wallet</h1>
+<h1 class="title">Digital Wallet</h1>
 
-<div class="layout">
+<div class="container">
 
-    <!-- USER REGISTRATION -->
     <div class="card">
-        <h2>Create Account</h2>
+        <h2>Create User</h2>
 
         <input id="username" placeholder="Username">
         <input id="email" placeholder="Email">
         <input id="mobile" placeholder="Mobile">
 
-        <button onclick="registerUser()">Register User</button>
+        <button onclick="registerUser()">Register</button>
+
     </div>
 
-
-    <!-- WALLET DASHBOARD -->
     <div class="card">
 
-        <h2>Wallet Dashboard</h2>
+        <h2>Wallet</h2>
 
-        <input id="userId" placeholder="Enter User ID">
+        <input id="userId" placeholder="User ID">
 
         <button onclick="checkBalance()">Check Balance</button>
 
         <p id="balance"></p>
 
-        <hr>
-
         <h3>Deposit</h3>
 
         <input id="depositAmount" placeholder="Amount">
 
-        <button onclick="depositMoney()">Deposit Money</button>
-
-        <hr>
+        <button onclick="depositMoney()">Deposit</button>
 
         <h3>Withdraw</h3>
 
         <input id="withdrawAmount" placeholder="Amount">
 
-        <button onclick="withdrawMoney()">Withdraw Money</button>
+        <button onclick="withdrawMoney()">Withdraw</button>
 
-        <hr>
+    </div>
 
-        <h3>Transactions</h3>
+    <div class="card">
 
-        <button onclick="getTransactions()">Load Transactions</button>
+        <h2>Transfer Money</h2>
 
-        <ul id="transactions"></ul>
+        <input id="senderId" placeholder="Sender ID">
+        <input id="receiverId" placeholder="Receiver ID">
+        <input id="transferAmount" placeholder="Amount">
+
+        <button onclick="transferMoney()">Transfer</button>
 
     </div>
 
 </div>
 
-<script src="script.js"></script>
+<script src="/script.js"></script>
 
 </body>
 </html>
