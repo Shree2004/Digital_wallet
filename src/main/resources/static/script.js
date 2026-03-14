@@ -111,3 +111,32 @@ amount:amount
 getBalance();
 
 }
+
+async function register(){
+
+const userName = document.getElementById("username").value;
+const emailId = document.getElementById("email").value;
+const mobileNumber = document.getElementById("mobile").value;
+const password = document.getElementById("password").value;
+
+const res = await fetch(API + "/users/register", {
+method: "POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({
+userName:userName,
+emailId:emailId,
+mobileNumber:mobileNumber,
+password:password
+})
+});
+
+if(res.ok){
+alert("User Registered Successfully");
+window.location.href="login.html";
+}else{
+alert("Registration failed");
+}
+
+}
