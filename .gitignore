@@ -16,5 +16,5 @@ target/
 Thumbs.db
 
 # Environment configs
-application.properties
-application.yml
+#application.properties
+#application.yml
